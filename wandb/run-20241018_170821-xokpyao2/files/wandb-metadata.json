@@ -1,0 +1,39 @@
+{
+  "os": "macOS-15.0.1-arm64-arm-64bit",
+  "python": "3.11.1",
+  "startedAt": "2024-10-19T00:08:21.211683Z",
+  "program": "/Users/lauralee/Code/LLMs/language-game/app.py",
+  "codePath": "app.py",
+  "git": {
+    "remote": "https://github.com/flores8/language-game.git",
+    "commit": "30aac95d23b492d3f833b0d332e1803518b151b7"
+  },
+  "email": "lauralee.flores@wandb.com",
+  "root": "/Users/lauralee/Code/LLMs/language-game",
+  "host": "LauraleDKH22XVG",
+  "username": "lauralee",
+  "executable": "/Users/lauralee/Code/LLMs/language-game/venv/bin/python3.11",
+  "codePathLocal": "app.py",
+  "cpu_count": 10,
+  "cpu_count_logical": 10,
+  "disk": {
+    "/": {
+      "total": "494384795648",
+      "used": "297776033792"
+    }
+  },
+  "memory": {
+    "total": "17179869184"
+  },
+  "cpu": {
+    "count": 10,
+    "countLogical": 10
+  },
+  "apple": {
+    "name": "Apple M1 Pro",
+    "ecpuCores": 2,
+    "pcpuCores": 8,
+    "gpuCores": 16,
+    "memoryGb": 16
+  }
+}

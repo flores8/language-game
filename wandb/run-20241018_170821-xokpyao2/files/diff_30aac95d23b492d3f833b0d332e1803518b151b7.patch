@@ -1,0 +1,208 @@
+diff --git a/api_handler.py b/api_handler.py
+index adc1b81..b27411b 100644
+--- a/api_handler.py
++++ b/api_handler.py
+@@ -1,14 +1,14 @@
+ import os
+-import openai
++from openai import OpenAI
+ from dotenv import load_dotenv
+ 
+ load_dotenv()
+ 
+-openai.api_key = os.getenv("OPENAI_API_KEY")
++client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+ 
+ def translate_text(text, target_language):
+     try:
+-        response = openai.ChatCompletion.create(
++        response = client.chat.completions.create(
+             model="gpt-3.5-turbo",
+             messages=[
+                 {"role": "system", "content": f"You are a translator. Translate the following text to {target_language}."},
+@@ -16,14 +16,14 @@ def translate_text(text, target_language):
+             ],
+             max_tokens=100
+         )
+-        return response.choices[0].message['content'].strip()
++        return response.choices[0].message.content.strip()
+     except Exception as e:
+-        print(f"An error occurred: {e}")
++        print(f"An error occurred during translation: {e}")
+         return None
+ 
+ def generate_sentence():
+     try:
+-        response = openai.ChatCompletion.create(
++        response = client.chat.completions.create(
+             model="gpt-3.5-turbo",
+             messages=[
+                 {"role": "system", "content": "Generate a random sentence in English. The sentence should be between 6 to 12 words long."},
+@@ -31,7 +31,7 @@ def generate_sentence():
+             ],
+             max_tokens=50
+         )
+-        return response.choices[0].message['content'].strip()
++        return response.choices[0].message.content.strip()
+     except Exception as e:
+-        print(f"An error occurred: {e}")
+-        return None
+\ No newline at end of file
++        print(f"An error occurred during sentence generation: {e}")
++        return None
+diff --git a/app.py b/app.py
+index 73c5d62..3e11c32 100644
+--- a/app.py
++++ b/app.py
+@@ -1,64 +1,70 @@
+ import streamlit as st
+-from game_logic import get_translation_and_options, check_answer
++from game_logic import get_translation_and_options
++import logging
++import weave
++from weave_app import game_panel, init_game_state, new_round, check_answer_and_update, GameState
++import wandb
++
++# Set up logging
++logging.basicConfig(level=logging.INFO)
++
++# Initialize W&B
++wandb.init(project="language-translation-game", entity="lauraleef")
++
++st.set_page_config(page_title="Language Translation Game", page_icon="🌍", layout="wide")
++
++# Load custom CSS
++with open('.streamlit/style.css') as f:
++    st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+ 
+ st.title("Language Translation Game")
+ 
+ if 'game_state' not in st.session_state:
+-    st.session_state.game_state = {
+-        'score': 0,
+-        'round': 1,
+-        'original_sentence': '',
+-        'translated_sentence': '',
+-        'correct_language': '',
+-        'options': []
+-    }
++    st.session_state.game_state = init_game_state()
+ 
+-def new_round():
+-    original, translated, language, options = get_translation_and_options()
+-    st.session_state.game_state.update({
+-        'original_sentence': original,
+-        'translated_sentence': translated,
+-        'correct_language': language,
+-        'options': options
+-    })
++def new_round_wrapper():
++    logging.info("Starting new round")
++    try:
++        st.session_state.game_state = new_round(st.session_state.game_state)
++        logging.info("Updated game state")
++        return True
++    except ValueError as e:
++        st.error(str(e))
++        logging.error(f"Error in new_round: {str(e)}")
++        return False
+ 
+-if st.session_state.game_state['round'] == 1 and not st.session_state.game_state['translated_sentence']:
+-    new_round()
++if st.session_state.game_state.round == 1 and not st.session_state.game_state.original_sentence:
++    logging.info("Initializing first round")
++    if not new_round_wrapper():
++        st.stop()
+ 
+-st.write(f"Round: {st.session_state.game_state['round']}/10")
+-st.write(f"Score: {st.session_state.game_state['score']}")
++st.write(f"Round: {st.session_state.game_state.round}/10")
++st.write(f"Score: {st.session_state.game_state.score}")
+ 
+ st.write("Translated sentence:")
+-st.write(st.session_state.game_state['translated_sentence'])
++st.write(st.session_state.game_state.translated_sentence)
+ 
+ st.write("What language is this translated to?")
+ 
+-for option in st.session_state.game_state['options']:
+-    if st.button(option):
+-        if check_answer(option, st.session_state.game_state['correct_language']):
+-            st.success("Correct!")
+-            st.session_state.game_state['score'] += 10
+-        else:
+-            st.error(f"Incorrect. The correct answer was {st.session_state.game_state['correct_language']}.")
+-        
+-        st.write(f"Original sentence: {st.session_state.game_state['original_sentence']}")
+-        
+-        if st.session_state.game_state['round'] < 10:
+-            st.session_state.game_state['round'] += 1
+-            new_round()
+-            st.experimental_rerun()
+-        else:
+-            st.write("Game Over!")
+-            st.write(f"Final Score: {st.session_state.game_state['score']}")
++st.markdown('<div class="language-buttons">', unsafe_allow_html=True)
++for i, option in enumerate(st.session_state.game_state.options):
++    if i % 2 == 0:
++        cols = st.columns(2)
++    if cols[i % 2].button(option, key=f"lang_{i}", use_container_width=True, type="primary"):
++        st.session_state.game_state = check_answer_and_update(st.session_state.game_state, option)
++st.markdown('</div>', unsafe_allow_html=True)
++
++if st.session_state.game_state.round > 10:
++    st.write("Game Over!")
++    st.write(f"Final Score: {st.session_state.game_state.score}")
++    wandb.finish()
++
++if st.button("New Game", key="NewGame"):
++    wandb.finish()
++    wandb.init(project="language-translation-game", entity="lauraleef")
++    st.session_state.game_state = init_game_state()
++    new_round_wrapper()
++    st.rerun()
+ 
+-if st.button("New Game"):
+-    st.session_state.game_state = {
+-        'score': 0,
+-        'round': 1,
+-        'original_sentence': '',
+-        'translated_sentence': '',
+-        'correct_language': '',
+-        'options': []
+-    }
+-    new_round()
+-    st.experimental_rerun()
+\ No newline at end of file
++# Run the Weave app alongside Streamlit
++weave.run(game_panel)
+diff --git a/game_logic.py b/game_logic.py
+index 6f11bc7..0fd2348 100644
+--- a/game_logic.py
++++ b/game_logic.py
+@@ -7,18 +7,19 @@ def get_random_language():
+     return random.choice(LANGUAGES)
+ 
+ def generate_options(correct_language):
+-    options = random.sample(LANGUAGES, 3)
++    options = random.sample(LANGUAGES, 4)
+     if correct_language not in options:
+         options[0] = correct_language
+     random.shuffle(options)
+     return options
+ 
+-def check_answer(user_choice, correct_language):
+-    return user_choice == correct_language
+-
+ def get_translation_and_options():
+     original_sentence = generate_sentence()
++    if original_sentence is None:
++        return None, None, None, None
+     target_language = get_random_language()
+     translated_sentence = translate_text(original_sentence, target_language)
++    if translated_sentence is None:
++        return None, None, None, None
+     options = generate_options(target_language)
+-    return original_sentence, translated_sentence, target_language, options
+\ No newline at end of file
++    return original_sentence, translated_sentence, target_language, options

@@ -1,0 +1,16 @@
+{"time":"2024-10-18T17:08:21.213943-07:00","level":"INFO","msg":"using version","core version":"0.18.5"}
+{"time":"2024-10-18T17:08:21.214006-07:00","level":"INFO","msg":"created symlink","path":"/Users/lauralee/Code/LLMs/language-game/wandb/run-20241018_170821-xokpyao2/logs/debug-core.log"}
+{"time":"2024-10-18T17:08:21.776921-07:00","level":"INFO","msg":"created new stream","id":"xokpyao2"}
+{"time":"2024-10-18T17:08:21.776969-07:00","level":"INFO","msg":"stream: started","id":"xokpyao2"}
+{"time":"2024-10-18T17:08:21.777022-07:00","level":"INFO","msg":"sender: started","stream_id":"xokpyao2"}
+{"time":"2024-10-18T17:08:21.777155-07:00","level":"INFO","msg":"writer: Do: started","stream_id":{"value":"xokpyao2"}}
+{"time":"2024-10-18T17:08:21.777047-07:00","level":"INFO","msg":"handler: started","stream_id":{"value":"xokpyao2"}}
+{"time":"2024-10-18T17:08:22.109954-07:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-10-18T17:16:25.216222-07:00","level":"INFO","msg":"stream: closing","id":"xokpyao2"}
+{"time":"2024-10-18T17:16:25.217015-07:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-10-18T17:16:25.231284-07:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-10-18T17:16:26.852596-07:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-10-18T17:16:27.081939-07:00","level":"INFO","msg":"handler: closed","stream_id":{"value":"xokpyao2"}}
+{"time":"2024-10-18T17:16:27.082028-07:00","level":"INFO","msg":"writer: Close: closed","stream_id":{"value":"xokpyao2"}}
+{"time":"2024-10-18T17:16:27.082396-07:00","level":"INFO","msg":"sender: closed","stream_id":"xokpyao2"}
+{"time":"2024-10-18T17:16:27.082782-07:00","level":"INFO","msg":"stream: closed","id":"xokpyao2"}

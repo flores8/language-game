@@ -1,0 +1,77 @@
+/* Button styles */
+.stButton > button {
+    background-color: #1A8F8A;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    height: 3em;
+    width: 100%;
+    font-size: 18px;
+    margin-bottom: 6px;
+    transition: all 0.3s ease;
+}
+
+.stButton > button:hover {
+    background-color: #157570;
+}
+
+/* Button layout */
+.language-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.language-buttons > div {
+    width: 48%;
+    margin-bottom: 10px;
+}
+
+.stTitle {
+    color: #0E1117;
+    font-size: 50px;
+}
+
+/* Hide Streamlit elements */
+div[data-testid="stToolbar"],
+div[data-testid="stDecoration"],
+div[data-testid="stStatusWidget"],
+#MainMenu,
+footer {
+    display: none;
+}
+
+/* Success and Error messages */
+.stSuccess {
+    background-color: #D4EDDA;
+    color: #155724;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.stError {
+    background-color: #F8D7DA;
+    color: #721C24;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* New Game button styles */
+.stButton button[kind="secondary"] {
+    background-color: white;
+    color: black;
+    border: 1px solid #1A8F8A;
+    border-radius: 9px;
+    height: 3em;
+    width: auto;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.stButton button[kind="secondary"]:hover {
+    border: 1px solid #1A8F8A;
+    background-color: #1A8F8A;
+    color: white;
+}

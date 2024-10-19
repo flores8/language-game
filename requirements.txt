@@ -1,0 +1,4 @@
+weave
+openai
+python-dotenv
+wandb

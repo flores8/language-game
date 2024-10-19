@@ -1,0 +1,144 @@
+2024-10-18 17:08:22.246 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 5, in <module>
+    from weave_app import game_panel, init_game_state, new_round, check_answer_and_update, GameState
+  File "/Users/lauralee/Code/LLMs/language-game/weave_app.py", line 10, in <module>
+    @weave.type()
+     ^^^^^^^^^^
+AttributeError: module 'weave' has no attribute 'type'
+2024-10-18 17:08:56.153 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 5, in <module>
+    from weave_app import game_panel, init_game_state, new_round, check_answer_and_update, GameState
+  File "/Users/lauralee/Code/LLMs/language-game/weave_app.py", line 83, in <module>
+    @weave.panels.panel()
+     ^^^^^^^^^^^^
+AttributeError: module 'weave' has no attribute 'panels'
+2024-10-18 17:09:32.841 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 5, in <module>
+    from weave_app import game_panel, init_game_state, new_round, check_answer_and_update, GameState
+  File "/Users/lauralee/Code/LLMs/language-game/weave_app.py", line 110, in <module>
+    weave.app(game_panel)
+    ^^^^^^^^^
+AttributeError: module 'weave' has no attribute 'app'
+INFO:root:Initializing first round
+INFO:root:Starting new round
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:Updated game state
+2024-10-18 17:10:12.215 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 70, in <module>
+    weave.run(game_panel)
+    ^^^^^^^^^
+AttributeError: module 'weave' has no attribute 'run'
+INFO:root:Initializing first round
+INFO:root:Starting new round
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:Updated game state
+2024-10-18 17:10:55.775 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 70, in <module>
+    weave.run(game_panel)
+    ^^^^^^^^^
+AttributeError: module 'weave' has no attribute 'run'
+INFO:root:Initializing first round
+INFO:root:Starting new round
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:Updated game state
+2024-10-18 17:11:15.433 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 70, in <module>
+    weave.run(game_panel)
+    ^^^^^^^^^
+AttributeError: module 'weave' has no attribute 'run'
+INFO:root:Initializing first round
+INFO:root:Starting new round
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:Updated game state
+2024-10-18 17:12:50.477 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 70, in <module>
+    weave.run(game_panel)
+    ^^^^^^^^^
+AttributeError: module 'weave' has no attribute 'run'
+2024-10-18 17:13:57.930 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 5, in <module>
+    from weave_app import game_panel, init_game_state, new_round, check_answer_and_update, GameState
+ImportError: cannot import name 'game_panel' from 'weave_app' (/Users/lauralee/Code/LLMs/language-game/weave_app.py)
+INFO:root:Initializing first round
+INFO:root:Starting new round
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:root:Updated game state
+2024-10-18 17:14:37.380 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 70, in <module>
+    weave.run(game_panel)
+    ^^^^^^^^^
+AttributeError: module 'weave' has no attribute 'run'
+2024-10-18 17:14:43.390 Uncaught app exception
+Traceback (most recent call last):
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/exec_code.py", line 88, in exec_func_with_error_handling
+    result = func()
+             ^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/venv/lib/python3.11/site-packages/streamlit/runtime/scriptrunner/script_runner.py", line 579, in code_to_exec
+    exec(code, module.__dict__)
+  File "/Users/lauralee/Code/LLMs/language-game/app.py", line 54, in <module>
+    st.session_state.game_state = check_answer_and_update(st.session_state.game_state, option)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/lauralee/Code/LLMs/language-game/weave_app.py", line 60, in check_answer_and_update
+    return new_round(GameState(
+           ^^^^^^^^^^^^^^^^^^^^
+TypeError: 'int' object is not callable
+[34m  Stopping...[0m
