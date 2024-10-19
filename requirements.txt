@@ -1,6 +1,4 @@
-streamlit
+weave
 openai
 python-dotenv
-pandas
-weave
 wandb
