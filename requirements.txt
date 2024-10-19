@@ -1,5 +1,4 @@
 weave
 openai
 python-dotenv
-wandb
 streamlit
