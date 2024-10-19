@@ -3,7 +3,21 @@ from openai import OpenAI
 import weave 
 import streamlit as st
 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+# Determine if we're running in a Streamlit Cloud environment
+is_streamlit_cloud = os.environ.get('STREAMLIT_RUNTIME') == 'true'
+
+if is_streamlit_cloud:
+    # Use Streamlit secrets for production
+    api_key = st.secrets["OPENAI_API_KEY"]
+else:
+    # Use environment variable for local development
+    api_key = os.getenv("OPENAI_API_KEY")
+
+    # Optionally, you can add a check to ensure the API key is set
+    if not api_key:
+        raise ValueError("OPENAI_API_KEY environment variable is not set")
+
+client = OpenAI(api_key=api_key)
 
 @weave.op()
 def translate_text(text, target_language):
