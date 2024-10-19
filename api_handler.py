@@ -1,11 +1,9 @@
 import os
 from openai import OpenAI
-from dotenv import load_dotenv
 import weave 
+import streamlit as st
 
-load_dotenv()
-
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 @weave.op()
 def translate_text(text, target_language):
