@@ -17,12 +17,22 @@ def get_translation_and_options():
     original_sentence = generate_sentence()
     if original_sentence is None:
         return None, None, None, None
+    
     target_language = get_random_language()
-    translated_sentence = translate_text(original_sentence, target_language)
-    if translated_sentence is None:
+    translated_sentence, actual_language = translate_text(original_sentence, target_language)
+    if translated_sentence is None or actual_language is None:
         return None, None, None, None
-    options = generate_options(target_language)
-    return original_sentence, translated_sentence, target_language, options
+    
+    options = generate_options(actual_language)
+    return original_sentence, translated_sentence, actual_language, options
+
+def is_similar(text1, text2):
+    # Simple similarity check based on word count
+    words1 = set(text1.lower().split())
+    words2 = set(text2.lower().split())
+    common_words = words1.intersection(words2)
+    similarity = len(common_words) / max(len(words1), len(words2))
+    return similarity > 0.5  # Adjust this threshold as needed
 
 def new_round(game_state):
     original_sentence, translated_sentence, correct_language, options = get_translation_and_options()

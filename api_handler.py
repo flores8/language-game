@@ -45,12 +45,13 @@ def translate_text(text, target_language):
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "system", "content": f"You are a translator. Translate the following text to {target_language}."},
+                {"role": "system", "content": f"You are a translator. Translate the following text to {target_language}. Respond with only the translation and the actual language you translated to, separated by a pipe character '|'."},
                 {"role": "user", "content": text}
-            ],
-            max_tokens=100
+            ]
         )
-        return response.choices[0].message.content.strip()
+        result = response.choices[0].message.content.strip()
+        translated_text, actual_language = result.split('|')
+        return translated_text.strip(), actual_language.strip()
     except Exception as e:
         logger.error(f"An error occurred during translation: {e}")
         return f"Error during translation: {str(e)}"
