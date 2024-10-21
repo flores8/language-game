@@ -1,5 +1,5 @@
 import streamlit as st
-from game_logic import get_translation_and_options, new_round, check_answer_and_update, init_game_state
+from game_logic import get_translation_and_options, new_round, check_answer_and_update, init_game_state, is_language_match
 from api_handler import client, log_guess
 import logging
 
@@ -62,8 +62,8 @@ if st.session_state.game_state['round'] <= 10:
                 is_correct
             )
             
-            if is_correct:
-                st.success(f"Correct! The language was {option}.")
+            if is_language_match(option, st.session_state.game_state['correct_language']):
+                st.success(f"Correct! The language was {st.session_state.game_state['correct_language']}.")
             else:
                 st.error(f"Sorry, that's incorrect. The correct language was {st.session_state.game_state['correct_language']}.")
             
