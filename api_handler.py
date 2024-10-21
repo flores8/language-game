@@ -1,6 +1,6 @@
+import weave 
 import os
 from openai import OpenAI
-import weave 
 import streamlit as st
 
 # Determine if we're running in a Streamlit Cloud environment
@@ -50,5 +50,3 @@ def generate_sentence():
     except Exception as e:
         print(f"An error occurred during sentence generation: {e}")
         return None
-
-weave.init('language-translation-game')
