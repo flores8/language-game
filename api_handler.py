@@ -74,3 +74,13 @@ def generate_sentence():
     except Exception as e:
         logger.error(f"An error occurred during sentence generation: {e}")
         return f"Error during sentence generation: {str(e)}"
+
+@weave.op()
+def log_guess(original_sentence: str, translated_sentence: str, correct_language: str, guessed_language: str, is_correct: bool):
+    return {
+        "original_sentence": original_sentence,
+        "translated_sentence": translated_sentence,
+        "correct_language": correct_language,
+        "guessed_language": guessed_language,
+        "is_correct": is_correct
+    }
