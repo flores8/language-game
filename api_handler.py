@@ -2,6 +2,7 @@ import weave
 import os
 from openai import OpenAI
 import streamlit as st
+import logging
 
 # Determine if we're running in a Streamlit Cloud environment
 is_streamlit_cloud = os.environ.get('STREAMLIT_RUNTIME') == 'true'
@@ -19,6 +20,10 @@ else:
 
 client = OpenAI(api_key=api_key)
 
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
 @weave.op()
 def translate_text(text, target_language):
     try:
@@ -32,8 +37,8 @@ def translate_text(text, target_language):
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
-        print(f"An error occurred during translation: {e}")
-        return None
+        logger.error(f"An error occurred during translation: {e}")
+        raise  # Re-raise the exception to be handled by the caller
 
 @weave.op()
 def generate_sentence():
@@ -48,5 +53,5 @@ def generate_sentence():
         )
         return response.choices[0].message.content.strip()
     except Exception as e:
-        print(f"An error occurred during sentence generation: {e}")
-        return None
+        logger.error(f"An error occurred during sentence generation: {e}")
+        raise  # Re-raise the exception to be handled by the caller
