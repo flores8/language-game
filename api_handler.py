@@ -3,6 +3,11 @@ import os
 from openai import OpenAI
 import streamlit as st
 import logging
+from typing import Optional
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # Determine if we're running in a Streamlit Cloud environment
 is_streamlit_cloud = os.environ.get('STREAMLIT_RUNTIME') == 'true'
@@ -18,16 +23,12 @@ else:
     if not api_key:
         raise ValueError("OPENAI_API_KEY environment variable is not set")
 
+client: Optional[OpenAI] = None
 try:
     client = OpenAI(api_key=api_key)
 except Exception as e:
     logger.error(f"Failed to initialize OpenAI client: {e}")
     st.error("Failed to initialize OpenAI client. Please check your API key.")
-    client = None
-
-# Set up logging
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 @weave.op()
 def translate_text(text, target_language):
