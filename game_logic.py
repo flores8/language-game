@@ -72,12 +72,14 @@ def check_answer_and_update(game_state, selected_language):
     if is_correct:
         game_state['score'] += 1
     
+    current_correct_language = game_state['correct_language']  # Store the current correct language
+    
     game_state['round'] += 1
     
     if game_state['round'] <= 10:
         game_state = new_round(game_state)
     
-    return game_state, is_correct
+    return game_state, is_correct, current_correct_language
 
 def init_game_state():
     return {

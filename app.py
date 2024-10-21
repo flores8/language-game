@@ -49,21 +49,22 @@ if st.session_state.game_state['round'] <= 10:
         if i % 2 == 0:
             cols = st.columns(2)
         if cols[i % 2].button(option, key=f"lang_{i}", use_container_width=True, type="primary"):
-            st.session_state.game_state, is_correct = check_answer_and_update(st.session_state.game_state, option)
+            user_guess = option  # Store the user's guess
+            st.session_state.game_state, is_correct = check_answer_and_update(st.session_state.game_state, user_guess)
             
             # Log the guess to Weave
             log_guess(
                 st.session_state.game_state['original_sentence'],
                 st.session_state.game_state['translated_sentence'],
                 st.session_state.game_state['correct_language'],
-                option,
+                user_guess,
                 is_correct
             )
             
             if is_correct:
-                st.success(f"Correct! The language was {st.session_state.game_state['correct_language']}.")
+                st.success(f"Correct! You guessed {user_guess}, and the language was indeed {st.session_state.game_state['correct_language']}.")
             else:
-                st.error(f"Sorry, that's incorrect. The correct language was {st.session_state.game_state['correct_language']}.")
+                st.error(f"Sorry, that's incorrect. You guessed {user_guess}, but the correct language was {st.session_state.game_state['correct_language']}.")
             
             if st.session_state.game_state['round'] <= 10:
                 new_round_wrapper()
