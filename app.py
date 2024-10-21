@@ -2,7 +2,6 @@ import streamlit as st
 from game_logic import get_translation_and_options, new_round, check_answer_and_update, init_game_state
 from api_handler import client 
 import logging
-import time  # Add this import
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -57,8 +56,8 @@ if st.session_state.game_state['round'] <= 10:
             else:
                 st.error(f"Sorry, that's incorrect. The correct language was {st.session_state.game_state['correct_language']}.")
             
-            # Add a delay before starting a new round and refreshing
-            time.sleep(1)  # Delay for 2 seconds
+            # Remove the time delay
+            # time.sleep(1)  # This line should be removed
             
             if st.session_state.game_state['round'] <= 10:
                 new_round_wrapper()
