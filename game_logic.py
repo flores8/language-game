@@ -3,6 +3,8 @@ from api_handler import translate_text, generate_sentence
 
 LANGUAGES = ["English", "Mandarin Chinese", "Spanish", "Arabic", "Hindi", "Russian", "Japanese", "French", "German", "Swahili"]
 
+__all__ = ['get_translation_and_options', 'new_round', 'check_answer_and_update', 'init_game_state', 'is_language_match']
+
 def get_random_language():
     return random.choice(LANGUAGES)
 
@@ -46,8 +48,27 @@ def new_round(game_state):
     
     return game_state
 
+def is_language_match(selected, correct):
+    selected = selected.lower()
+    correct = correct.lower()
+    
+    # Direct match
+    if selected == correct:
+        return True
+    
+    # Partial match (e.g., "Chinese" matches "Mandarin Chinese")
+    if selected in correct or correct in selected:
+        return True
+    
+    # Special cases
+    if (selected == "chinese" and correct == "mandarin chinese") or \
+       (selected == "mandarin chinese" and correct == "chinese"):
+        return True
+    
+    return False
+
 def check_answer_and_update(game_state, selected_language):
-    if selected_language == game_state['correct_language']:
+    if is_language_match(selected_language, game_state['correct_language']):
         game_state['score'] += 1
     
     game_state['round'] += 1
