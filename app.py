@@ -52,8 +52,10 @@ if st.session_state.game_state['round'] <= 10:
             previous_score = st.session_state.game_state['score']
             st.session_state.game_state = check_answer_and_update(st.session_state.game_state, option)
             
-            # Log the guess to Weave
+            # Determine if the answer was correct
             is_correct = st.session_state.game_state['score'] > previous_score
+            
+            # Log the guess to Weave
             log_guess(
                 st.session_state.game_state['original_sentence'],
                 st.session_state.game_state['translated_sentence'],
@@ -62,7 +64,7 @@ if st.session_state.game_state['round'] <= 10:
                 is_correct
             )
             
-            if is_language_match(option, st.session_state.game_state['correct_language']):
+            if is_correct:
                 st.success(f"Correct! The language was {st.session_state.game_state['correct_language']}.")
             else:
                 st.error(f"Sorry, that's incorrect. The correct language was {st.session_state.game_state['correct_language']}.")
