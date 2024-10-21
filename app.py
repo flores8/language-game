@@ -1,5 +1,6 @@
 import streamlit as st
 from game_logic import get_translation_and_options, new_round, check_answer_and_update, init_game_state
+from api_handler import client 
 import logging
 import time  # Add this import
 
@@ -16,6 +17,11 @@ st.title("Guess the correct language!")
 
 if 'game_state' not in st.session_state:
     st.session_state.game_state = init_game_state()
+
+# Add this near the top of the file, after the imports
+if client is None:
+    st.error("Failed to initialize OpenAI client. Please check your API key.")
+    st.stop()
 
 def new_round_wrapper():
     logging.info("Starting new round")
