@@ -5,6 +5,8 @@ import streamlit as st
 import logging
 from typing import Optional
 
+weave.init('language-translation-game')
+
 # Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
