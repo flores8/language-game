@@ -5,7 +5,7 @@ import streamlit as st
 import logging
 from typing import Optional
 
-weave.init('language-translation-game')
+weave.init("wandb-designers/language-translation-game")
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)

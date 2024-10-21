@@ -58,7 +58,7 @@ if st.session_state.game_state['round'] <= 10:
                 st.error(f"Sorry, that's incorrect. The correct language was {st.session_state.game_state['correct_language']}.")
             
             # Add a delay before starting a new round and refreshing
-            time.sleep(2)  # Delay for 2 seconds
+            time.sleep(1)  # Delay for 2 seconds
             
             if st.session_state.game_state['round'] <= 10:
                 new_round_wrapper()
