@@ -1,6 +1,6 @@
 import streamlit as st
 from game_logic import get_translation_and_options, new_round, check_answer_and_update, init_game_state
-from api_handler import client 
+from api_handler import client, log_guess
 import logging
 
 # Set up logging
@@ -51,7 +51,18 @@ if st.session_state.game_state['round'] <= 10:
         if cols[i % 2].button(option, key=f"lang_{i}", use_container_width=True, type="primary"):
             previous_score = st.session_state.game_state['score']
             st.session_state.game_state = check_answer_and_update(st.session_state.game_state, option)
-            if st.session_state.game_state['score'] > previous_score:
+            
+            # Log the guess to Weave
+            is_correct = st.session_state.game_state['score'] > previous_score
+            log_guess(
+                st.session_state.game_state['original_sentence'],
+                st.session_state.game_state['translated_sentence'],
+                st.session_state.game_state['correct_language'],
+                option,
+                is_correct
+            )
+            
+            if is_correct:
                 st.success(f"Correct! The language was {option}.")
             else:
                 st.error(f"Sorry, that's incorrect. The correct language was {st.session_state.game_state['correct_language']}.")
