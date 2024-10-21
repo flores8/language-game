@@ -18,7 +18,12 @@ else:
     if not api_key:
         raise ValueError("OPENAI_API_KEY environment variable is not set")
 
-client = OpenAI(api_key=api_key)
+try:
+    client = OpenAI(api_key=api_key)
+except Exception as e:
+    logger.error(f"Failed to initialize OpenAI client: {e}")
+    st.error("Failed to initialize OpenAI client. Please check your API key.")
+    client = None
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -26,6 +31,10 @@ logger = logging.getLogger(__name__)
 
 @weave.op()
 def translate_text(text, target_language):
+    if client is None:
+        logger.error("OpenAI client is not initialized")
+        return "Error: OpenAI client is not initialized. Please check your API key."
+    
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -38,10 +47,14 @@ def translate_text(text, target_language):
         return response.choices[0].message.content.strip()
     except Exception as e:
         logger.error(f"An error occurred during translation: {e}")
-        raise  # Re-raise the exception to be handled by the caller
+        return f"Error during translation: {str(e)}"
 
 @weave.op()
 def generate_sentence():
+    if client is None:
+        logger.error("OpenAI client is not initialized")
+        return "Error: OpenAI client is not initialized. Please check your API key."
+    
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
@@ -54,4 +67,4 @@ def generate_sentence():
         return response.choices[0].message.content.strip()
     except Exception as e:
         logger.error(f"An error occurred during sentence generation: {e}")
-        raise  # Re-raise the exception to be handled by the caller
+        return f"Error during sentence generation: {str(e)}"
