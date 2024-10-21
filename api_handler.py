@@ -1,10 +1,13 @@
 import weave
+import wandb
 import os
 from openai import OpenAI
 import streamlit as st
 import logging
 from typing import Optional
 
+wandb_key = os.environ.get("WANDB_KEY")
+wandb.login(key=wandb_key)
 weave.init("wandb-designers/language-translation-game")
 
 # Set up logging
