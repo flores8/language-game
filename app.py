@@ -49,8 +49,7 @@ if st.session_state.game_state['round'] <= 10:
         if i % 2 == 0:
             cols = st.columns(2)
         if cols[i % 2].button(option, key=f"lang_{i}", use_container_width=True, type="primary"):
-            user_guess = option  # Store the user's guess
-            st.session_state.game_state, is_correct, correct_language = check_answer_and_update(st.session_state.game_state, user_guess)
+            st.session_state.game_state, is_correct, correct_language, user_guess = check_answer_and_update(st.session_state.game_state, option)
             
             # Log the guess to Weave
             log_guess(
