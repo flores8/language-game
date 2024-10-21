@@ -49,11 +49,7 @@ if st.session_state.game_state['round'] <= 10:
         if i % 2 == 0:
             cols = st.columns(2)
         if cols[i % 2].button(option, key=f"lang_{i}", use_container_width=True, type="primary"):
-            previous_score = st.session_state.game_state['score']
-            st.session_state.game_state = check_answer_and_update(st.session_state.game_state, option)
-            
-            # Determine if the answer was correct
-            is_correct = st.session_state.game_state['score'] > previous_score
+            st.session_state.game_state, is_correct = check_answer_and_update(st.session_state.game_state, option)
             
             # Log the guess to Weave
             log_guess(
@@ -68,9 +64,6 @@ if st.session_state.game_state['round'] <= 10:
                 st.success(f"Correct! The language was {st.session_state.game_state['correct_language']}.")
             else:
                 st.error(f"Sorry, that's incorrect. The correct language was {st.session_state.game_state['correct_language']}.")
-            
-            # Remove the time delay
-            # time.sleep(1)  # This line should be removed
             
             if st.session_state.game_state['round'] <= 10:
                 new_round_wrapper()

@@ -68,15 +68,16 @@ def is_language_match(selected, correct):
     return False
 
 def check_answer_and_update(game_state, selected_language):
-    if is_language_match(selected_language, game_state['correct_language']):
+    is_correct = is_language_match(selected_language, game_state['correct_language'])
+    if is_correct:
         game_state['score'] += 1
     
     game_state['round'] += 1
     
     if game_state['round'] <= 10:
-        return new_round(game_state)
-    else:
-        return game_state
+        game_state = new_round(game_state)
+    
+    return game_state, is_correct
 
 def init_game_state():
     return {
